@@ -5,20 +5,19 @@ mutable struct CountmarkersRobot <: AbstractRobot
     num_markers::Int64
 end
  
-get_baserobot(robot::CountmarkersRobot) = robot.robot
+get_base_robot(robot::CountmarkersRobot) = robot.robot
 
-HSR.move!(robot::AbstractRobot, side) = move!(get_baserobot(robot), side)
-HSR.isborder(robot::AbstractRobot, side) = isborder(get_baserobot(robot), side)
-HSR.putmarker!(robot::AbstractRobot) = putmarker!(get_baserobot(robot))
-HSR.ismarker(robot::AbstractRobot) = ismarker(get_baserobot(robot))
-HSR.temperature(robot::AbstractRobot) = temperature(get_baserobot(robot))
+HSR.move!(robot::AbstractRobot, side) = move!(get_base_robot(robot), side)
+HSR.isborder(robot::AbstractRobot, side) = isborder(get_base_robot(robot), side)
+HSR.putmarker!(robot::AbstractRobot) = putmarker!(get_base_robot(robot))
+HSR.ismarker(robot::AbstractRobot) = ismarker(get_base_robot(robot))
+HSR.temperature(robot::AbstractRobot) = temperature(get_base_robot(robot))
 
 function HSR.move!(robot::CountmarkersRobot, side) 
     move!(robot.robot, side)
     if ismarker(robot)
         robot.num_markers += 1
     end
-    nothing
 end
 
 mutable struct Coordinates
@@ -42,7 +41,7 @@ function HSR.move!(coord::Coordinates, side::HorizonSide)
 end
 
 get(coord::Coordinates) = (coord.x, coord.y)
-get_baserobot(robot::ChessRobotN) = robot.robot
+get_base_robot(robot::ChessRobotN) = robot.robot
 
 function HSR.move!(robot::ChessRobotN, side)
     move!(robot.robot, side)
@@ -54,7 +53,7 @@ function HSR.move!(robot::ChessRobotN, side)
 end
 
 N = 1
-robot = ChessRobotN(Robot(animate=true, "task30.sit"), N)
+robot = ChessRobotN(Robot(animate=true, "30.sit"), N)
 map = []
 function mark_labirint!(robot::ChessRobotN) 
     x, y = get(robot.coordinates)
