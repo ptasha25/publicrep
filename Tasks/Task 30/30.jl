@@ -52,6 +52,16 @@ function HSR.move!(robot::ChessRobotN, side)
     end
 end
 
+function HSR.isborder(coord::Coordinates, side::HorizonSide, map)
+    cx, cy = coord.x, coord.y
+    if side == Ost cx += 1
+    elseif side == West cx -= 1
+    elseif side == Nord cy += 1
+    else cy -=  1
+    end
+    return ((cx,  cy) in map)
+end
+
 N = 1
 robot = ChessRobotN(Robot(animate=true, "30.sit"), N)
 map = []
@@ -68,15 +78,5 @@ function mark_labirint!(robot::ChessRobotN)
             end
         end
     end
-end
-
-function HSR.isborder(coord::Coordinates, side::HorizonSide, map)
-    cx, cy = coord.x, coord.y
-    if side == Ost cx += 1
-    elseif side == West cx -= 1
-    elseif side == Nord cy += 1
-    else cy -=  1
-    end
-    return ((cx,  cy) in map)
 end
 mark_labirint!(robot)
