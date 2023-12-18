@@ -11,7 +11,6 @@ HSR.move!(robot::AbstractRobot, side) = move!(get_base_robot(robot), side)
 HSR.isborder(robot::AbstractRobot, side) = isborder(get_base_robot(robot), side)
 HSR.putmarker!(robot::AbstractRobot) = putmarker!(get_base_robot(robot))
 HSR.ismarker(robot::AbstractRobot) = ismarker(get_base_robot(robot))
-HSR.temperature(robot::AbstractRobot) = temperature(get_base_robot(robot))
 
 function HSR.move!(robot::CountmarkersRobot, side) 
     move!(robot.robot, side)
